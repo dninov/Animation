@@ -31,13 +31,12 @@ var $container = $('.portfolioContainer');
          return false;
     }); 
         window.addEventListener("resize", Resize);
+     TweenMax.set("#logoBgr", { scale:2});
     if (window.pageYOffset<50){
-        TweenMax.to("#logoBgr", 1, { scaleX:4,scaleY:4, autoAlpha:"1", ease:Power3.easeOut}); 
         TweenMax.from("#share", 2, {top:-100,alpha:0, ease: Elastic.easeOut.config(1, 0.3)});
-        console.log("logo rise");
         }
     else if (window.pageYOffset>50){
-         console.log("logo dissapear");
+        console.log("logo dissapear");
         document.getElementById('canvas1').style.display="none"; 
         }
    
@@ -46,7 +45,24 @@ var $container = $('.portfolioContainer');
 });
 
 
-   
+$(document).on('click', 'a[href^="#"]', function (event) {
+    event.preventDefault();
+    $('html, body').animate({
+        scrollTop: $($.attr(this, 'href')).offset().top
+    },{ duration: 1500, easing: "easeOutBack" });
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 function Resize() {
     
@@ -60,10 +76,10 @@ function Scroll() {
    st = window.pageYOffset || document.documentElement.scrollTop;
    if (st > lastScrollTop){
        if (logoBig == true){
-           console.log("logo goes up");
+       console.log("logo goes up");
        logoBig = false;
-       TweenMax.set("#canvas1", {zIndex:4});
-       TweenMax.to("#canvas1", 1, {y:"-80%",   ease:Power3.easeOut});     
+       TweenMax.set("#canvas1", { zIndex:1});
+       
        TweenMax.to("#arrow", 0.2, {   autoAlpha:"0", ease:Power3.easeOut});
        TweenMax.to("#logoBgr", 3, { rotation:0,   autoAlpha:"0.5", ease:Power3.easeOut}); 
        TweenMax.to('.nav-link1', 1, {color:"#FFFFFF", ease:Power3.easeOut});
@@ -74,7 +90,7 @@ function Scroll() {
 
    } 
   else  if  (st < lastScrollTop && st > 300  ){
-      console.log("logo goes small");
+       console.log("logo goes small");
        document.getElementById('canvas1').style.display=""; 
        TweenMax.to('.fixed-top', 0.5, {marginTop:"0px", ease:Power3.easeOut});
        TweenMax.to('.nav-link1', 1, {color:"#354355", ease:Power3.easeOut});
@@ -88,8 +104,8 @@ function Scroll() {
        TweenMax.to("#arrow", 1, {   autoAlpha:"1", ease:Power3.easeOut}); 
        TweenMax.to("#logoBgr", 3, {  rotation:5,  autoAlpha:"1", ease:Power3.easeOut}); 
         TweenMax.to(".text-container", 2, { delay:0.5, y:0, ease: Elastic.easeOut.config(0.8, 0.8)});
-        logoBig = true;
         TweenMax.to("#canvas1", 1, {yPercent:-50, xPercent:-50, x:"-50%", y:"0%", scale:1,   ease: Elastic.easeOut.config(0.5, 0.5), clearProps:"xPercent, yPercent"});      
+        logoBig = true;
         }
     }
    lastScrollTop = st <= 0 ? 0 : st; 

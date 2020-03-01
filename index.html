@@ -109,21 +109,21 @@ function handleComplete(evt,comp) {
      
       <div id="share" class="share">
 					<button class="share-toggle-button">
-                        <a id="nav-toggle" href="#"><span></span></a>
+                        <a id="nav-toggle"><span></span></a>
 					</button>
 					<ul class="share-items">
 						<li class="share-item">
-							<a href="#" class="share-button">
+							<a href="#video-row" class="share-button">
 								<i class="share-icon fa fa-user-o"></i>
 							</a>
 						</li>
 						<li class="share-item">
-							<a href="#" class="share-button">
+							<a href="#servicesRow" class="share-button">
 								<i class="share-icon fa fa-thumbs-o-up"></i>
 							</a>
 						</li>
 						<li class="share-item">
-							<a href="#" class="share-button">
+							<a href="#clients" class="share-button">
 								<i class="share-icon fa fa-laptop"></i>
 							</a>
 						</li>
@@ -315,7 +315,7 @@ function handleComplete(evt,comp) {
         
         </div> 
 </div>
-<div class="row clients-row">
+<div id = "clients" class="row clients-row">
     <div class="clients-div">
       
             <img class="clients" src="images/wortenLogo.svg" alt="Worten Logo"/>
@@ -615,6 +615,8 @@ function handleComplete(evt,comp) {
       </div>
     <!-- Bootstrap core JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
     <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
