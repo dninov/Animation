@@ -3,7 +3,6 @@
   height: 100px;
   top: -10px;
   -webkit-filter: url("#goo");
-  filter: url("../share.html#goo");
   position: fixed;
   z-index: 1000;
   right: 50px;
