@@ -1,0 +1,67 @@
+.share {
+  max-width: 600px;
+  height: 100px;
+  top: -10px;
+  -webkit-filter: url("#goo");
+  filter: url("../share.html#goo");
+  position: fixed;
+  z-index: 1000;
+  right: 50px;
+}
+
+.share-button,
+.share-toggle-button {
+  position: absolute;
+  display: inline-block;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  width:70px;
+  height: 70px;
+  line-height: 64px;
+  margin-left: -35px;
+  margin-top: -35px;
+  background: #ccc;
+  text-align: center;
+  color: #fff;
+  border: 3px solid #fff; /* Green */
+  outline: none;
+}
+
+.share-button:hover,
+.share-toggle-button:hover {
+  color: #fff;
+}
+
+.share-button {
+  font-size: 30px;
+  background: #FC6C58;
+  -webkit-transform: scale(0.95, 0.95);
+  transform: scale(0.95, 0.95);
+  color: #222;
+}
+
+a.share-button {
+  color: #ffffff;
+}
+
+a.share-button:hover, 
+a.share-button:focus {
+  color: #ffffff;
+}
+
+.share-toggle-button {
+  z-index: 9;
+  background: #FC6C58;
+  font-size: 20px;
+}
+
+.share-items {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.share-item {
+  display: inline-block;
+}

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, shrink-to-fit=no">  
+    <meta name="description" content="">
+    <meta name="author" content="">
+      
+
+    <title>Studio Ninoff - Motion And Web Development</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css"/>  
+    <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="styles/nav.css">  
+    <link rel="stylesheet" href="styles/button.css">
+    <link rel="stylesheet" href="styles/gallery.css">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<!--    <link rel="stylesheet" type="text/css" href="fonts/vicons/vicons-font.css" />-->
+	<link rel="stylesheet" type="text/css" href="styles/base.css" />
+    
+      
+    <script>
+var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+function init() {
+	canvas = document.getElementById("canvas1");
+	anim_container = document.getElementById("animation_container");
+	dom_overlay_container = document.getElementById("dom_overlay_container");
+	var comp=AdobeAn.getComposition("DA067EB9AC36234D85634D7345B33772");
+	var lib=comp.getLibrary();
+	createjs.MotionGuidePlugin.install();
+	handleComplete({},comp);
+}
+function handleComplete(evt,comp) {
+	var lib=comp.getLibrary();
+	var ss=comp.getSpriteSheet();
+	exportRoot = new lib.logo();
+	stage = new lib.Stage(canvas);	
+	//Registers the "tick" event listener.
+	fnStartAnimation = function() {
+		stage.addChild(exportRoot);
+		createjs.Ticker.setFPS(lib.properties.fps);
+		createjs.Ticker.addEventListener("tick", stage);
+	}	    
+	//Code to support hidpi screens and responsive scaling.
+	function makeResponsive(isResp, respDim, isScale, scaleType) {		
+		var lastW, lastH, lastS=1;		
+		window.addEventListener('resize', resizeCanvas);		
+		resizeCanvas();		
+		function resizeCanvas() {			
+			var w = lib.properties.width, h = lib.properties.height;			
+			var iw = window.innerWidth, ih=window.innerHeight;			
+			var pRatio = window.devicePixelRatio || 1, xRatio=iw/w, yRatio=ih/h, sRatio=1;			
+			if(isResp) {                
+				if((respDim=='width'&&lastW==iw) || (respDim=='height'&&lastH==ih)) {                    
+					sRatio = lastS;                
+				}				
+				else if(!isScale) {					
+					if(iw<w || ih<h)						
+						sRatio = Math.min(xRatio, yRatio);				
+				}				
+				else if(scaleType==1) {					
+					sRatio = Math.min(xRatio, yRatio);				
+				}				
+				else if(scaleType==2) {					
+					sRatio = Math.max(xRatio, yRatio);				
+				}			
+			}			
+			canvas.width = w*pRatio*sRatio;			
+			canvas.height = h*pRatio*sRatio;
+			canvas.style.width = dom_overlay_container.style.width = anim_container.style.width =  w*sRatio+'px';				
+			canvas.style.height = anim_container.style.height = dom_overlay_container.style.height = h*sRatio+'px';
+			stage.scaleX = pRatio*sRatio;			
+			stage.scaleY = pRatio*sRatio;			
+			lastW = iw; lastH = ih; lastS = sRatio;            
+			stage.tickOnUpdate = false;            
+			stage.update();            
+			stage.tickOnUpdate = true;		
+		}
+	}
+	makeResponsive(true,'both',true,1);	
+	AdobeAn.compositionLoaded(lib.properties.id);
+	fnStartAnimation();
+}
+</script>  
+  </head>
+
+  <body onload="init();">
+<div id="preloader">
+<div class="spinner"></div> 
+</div>
+    <!-- Navigation -->
+<div id="myNav" class="overlay">
+  <div id='menu-txt'  class="overlay-content">
+    <a href="#">ABOUT ME</a>
+    <a href="#">SERVICES</a>
+    <a href="#">MY WORK</a>
+    <a href="#">CONTACT ME</a>
+  </div>
+</div>
+     
+      <div id="share" class="share">
+					<button class="share-toggle-button">
+                        <a id="nav-toggle" href="#"><span></span></a>
+					</button>
+					<ul class="share-items">
+						<li class="share-item">
+							<a href="#" class="share-button">
+								<i class="share-icon fa fa-user-o"></i>
+							</a>
+						</li>
+						<li class="share-item">
+							<a href="#" class="share-button">
+								<i class="share-icon fa fa-thumbs-o-up"></i>
+							</a>
+						</li>
+						<li class="share-item">
+							<a href="#" class="share-button">
+								<i class="share-icon fa fa-laptop"></i>
+							</a>
+						</li>
+						<li class="share-item">
+							<a href="#" class="share-button">
+								<i class="share-icon fa fa-comment-o"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+    <!-- Page Content -->
+    <div class="fixed-top">
+
+    </div>
+    <div  id="logo"> 
+        <div id="animation_container" style="background-color:rgba(69, 134, 211, 0.00); width:100%; height:100%;">
+            <canvas id="canvas1" style="background-color:rgba(69, 134, 211, 0.00);"></canvas>
+            <div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:100%; height:100%;">
+            </div>
+        </div>   
+    </div>
+      
+      
+    <div class="container-fluid">    
+    <div class = "row" >
+       <div id ="logoBgr" class = "col-lg-12">
+           
+       </div>   
+    </div>
+    
+     <div class = "row">
+         <div class = "col-sm-12 text-container">
+            <iframe class="text embed-responsive-item" src="frames/text.html" width="100%" height="100%" frameBorder="0">Browser not compatible.</iframe>
+            </div>  
+     </div>  
+    <div class = "row">
+        <div id="clouds" class = "col-sm-12 padding-0">          
+            <div id="arrow" class = "col-sm-12">
+            <iframe class=" embed-responsive-item" src="frames/arrow.html" width="50px" height="100%" frameBorder="0">Browser not compatible.</iframe>
+            </div> 
+        </div> 
+     </div>  
+
+<div id = "video-row" class = "row">
+ 
+    <div id="videoTxt" class = " col-lg-7" align="center">
+        <div class ='welcome-text'style="float:right" >
+            <h2>WELCOME TO</h2>
+            <h1>STUDIO NINOFF</h1>
+            <div id ="inlineText">
+            <p>My name is Delyan and I am passionate about</p> <h3> ANIMATION </h3> <p>and </p><h3>FRONT END</h3><p> development.</p>
+            </div> 
+        </div>
+    </div>
+    <div  style = "background-color:#FC6C58;" class = "col-lg-3 padding-0">
+        <div id="Video">
+            <video autoplay="autoplay" loop="loop" muted defaultMuted playsinline id="backVideo" width="1000px" height="720px" >
+                <source src="images/Intro1.m4v">  
+                <source src="images/Intro1.webm" type="video/webm">  
+               
+            </video>  
+        </div>
+        <div id="Mask">
+            
+        </div>
+    </div> 
+      <div  style = "background-color:#FC6C58;" class = "col-lg-2 padding-0">  
+    </div> 
+</div>
+    <div class="row">
+        <div class="waves">
+        
+        </div> 
+    </div>
+<div id = "servicesRow" class = 'row sticky-top' style="background-color:white;  z-index:10;">
+    <div class="container">    
+        
+        <div  class = "row">
+                <div  class = " col-xl-4  service">
+                    <iframe src="frames/res.html" width="300" height="220" frameBorder="0">Browser not compatible.</iframe>
+                    <div class="services-text">
+                      <h3>RESPONSIVE WEB DESIGN</h3>
+                        <p>Need a responsive website or splash page? I work with Bootstrap and Wordpress in order to find the best solution for your needs.</p>
+                    </div>
+                    <div class = 'button-base'>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="goo">
+                      <defs>
+                        <filter id="goo">
+                          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                          <feComposite in="SourceGraphic" in2="goo"/>
+                        </filter>
+                      </defs>
+                    </svg>
+
+                    <span class="button--bubble__container">
+                      <a href="#campaign" class="button button--bubble">
+                        VIEW MORE
+                      </a>
+                      <span class="button--bubble__effect-container">
+                        <span class="circle top-left"></span>
+                        <span class="circle top-left"></span>
+                        <span class="circle top-left"></span>
+
+                        <span class="button effect-button"></span>
+
+                        <span class="circle bottom-right"></span>
+                        <span class="circle bottom-right"></span>
+                        <span class="circle bottom-right"></span>
+                      </span>
+                    </span>
+                    </div>    
+                 </div> 
+                 <div  class = "col-xl-4 service">
+                  <iframe src="frames/timeline.html" width="300" height="220" frameBorder="0">Browser not compatible.</iframe>
+                    <div class="services-text">
+                      <h3>ANIMATIONS</h3>
+                        <p>Animation is an excelent tool for catching user attention and quickly presenting your ideas to the audiance. Bring motion to your business.</p>  
+                    </div>
+                     <div class = 'button-base'>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="goo">
+                      <defs>
+                        <filter id="goo">
+                          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                          <feComposite in="SourceGraphic" in2="goo"/>
+                        </filter>
+                      </defs>
+                    </svg>
+
+                    <span class="button--bubble__container">
+                      <a href="#campaign" class="button button--bubble">
+                        VIEW MORE
+                      </a>
+                      <span class="button--bubble__effect-container">
+                        <span class="circle bottom-right"></span>
+                        <span class="circle bottom-right"></span>
+                        <span class="circle bottom-right"></span>
+                        <span class="button effect-button"></span>
+                        <span class="circle top-left"></span>
+                        <span class="circle top-left"></span>
+                        <span class="circle top-left"></span>
+                      </span>
+                    </span>
+                    </div> 
+                </div> 
+                 <div  class = "col-xl-4 service">
+                 <iframe src="frames/interactive.html" width="300" height="220" frameBorder="0">Browser not compatible.</iframe>
+                  <div class="services-text">
+                      <h3>HTML5 ADS</h3>
+                        <p>Animated banners and interactive advertisment are the most efficiant way to reach your target audiance in the web. I can create </p>  
+                  </div> 
+                <div class = 'button-base'>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="goo">
+                      <defs>
+                        <filter id="goo">
+                          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                          <feComposite in="SourceGraphic" in2="goo"/>
+                        </filter>
+                      </defs>
+                    </svg>
+
+                    <span class="button--bubble__container">
+                      <a href="#campaign" class="button button--bubble">
+                        VIEW MORE
+                      </a>
+                      <span class="button--bubble__effect-container">
+                        <span class="circle top-left"></span>
+                        <span class="circle top-left"></span>
+                        <span class="circle top-left"></span>
+
+                        <span class="button effect-button"></span>
+
+                        <span class="circle bottom-right"></span>
+                        <span class="circle bottom-right"></span>
+                        <span class="circle bottom-right"></span>
+                      </span>
+                    </span>
+                    </div> 
+                </div>
+        </div>    
+    </div>     
+</div>
+<div class="row">
+
+        <div class="wavesDark">
+        
+        </div> 
+</div>
+<div class="row clients-row">
+    <div class="clients-div">
+      
+            <img class="clients" src="images/wortenLogo.svg" alt="Worten Logo"/>
+          
+            <img class="clients" src="images/subwayLogo.svg" alt="Subway Logo"/>
+
+            <img class="clients" src="images/IGNLogoBlack.svg" alt="IGN Logo"/>
+
+            <img class="clients" src="images/mass-save-logo.svg" alt="Mass Save Logo"/>
+            <img class="clients" src="images/HippieasLogoBlack.svg" alt="Hippeas Logo"/>
+
+    </div>    
+</div>
+  <div   class="row gallery-row">
+    <div  class="col-lg-12">
+        <div  class="portfolioFilter clearfix">
+          <a href="#" data-filter="*" class="current">All Categories</a>
+          <a href="#" data-filter=".animations">Animations</a>
+          <a href="#" data-filter=".logos">Logos</a>
+          <a href="#" data-filter=".drawings">Drawings</a>
+          <a href="#" data-filter=".ui">UI Elements</a>
+        </div>
+    </div>
+      <div  class="portfolioContainer">
+
+          <div   class="animations objects" data-toggle="modal" data-target="#Modal1">           
+              <div class="portfolio-item">
+                <div class="portfolio-header ">
+                    <h4>Animation</h4>
+                </div>
+                        <img src="modals/Modal1/Modal1.jpg" alt="image">
+                <div class="portfolio-footer">
+                    <h4>HTML5 Canvas, GIF, MP4</h4>
+                </div>
+              </div>
+             
+          </div>
+        <div class="ui objects" data-toggle="modal" data-target="#Modal2">           
+              <div class="portfolio-item">
+                <div class="portfolio-header ">
+                    <h4>Interactive Menu</h4>
+                </div>
+                        <img src="modals/Modal2/Modal2.jpg" alt="image">
+                <div class="portfolio-footer">
+                    <h4>HTML5 Canvas, GSAP</h4>
+                </div>
+              </div>
+             
+          </div>
+        <div class="animations objects" data-toggle="modal" data-target="#Modal3">           
+              <div class="portfolio-item">
+                <div class="portfolio-header ">
+                    <h4>Animated Price Holder</h4>
+                </div>
+                        <img src="modals/Modal3/Modal3.jpg" alt="image">
+                <div class="portfolio-footer">
+                    <h4>MP4</h4>
+                </div>
+              </div>
+             
+          </div>
+        <div class="animations objects" data-toggle="modal" data-target="#Modal4">           
+              <div class="portfolio-item">
+                <div class="portfolio-header ">
+                    <h4>Animated Logo Header</h4>
+                </div>
+                    <img src="modals/Modal4/Modal4.jpg" alt="image">
+                <div class="portfolio-footer">
+                    <h4>HTML5 Canvas, MP4, GIF</h4>
+                </div>
+              </div>
+             
+        </div>
+        <div class="animations objects" data-toggle="modal" data-target="#Modal5">           
+              <div class="portfolio-item">
+                <div class="portfolio-header ">
+                    <h4>Animated Logo Header</h4>
+                </div>
+                    <img src="modals/Modal5/Modal5.jpg" alt="image">
+                <div class="portfolio-footer">
+                    <h4>HTML5 Canvas, MP4, GIF</h4>
+                </div>
+              </div>
+             
+        </div>
+          <div class="animations objects" data-toggle="modal" data-target="#Modal6">           
+              <div class="portfolio-item">
+                <div class="portfolio-header ">
+                    <h4>Animated Logo Header</h4>
+                </div>
+                    <img src="modals/Modal6/Modal6.jpg" alt="image">
+                <div class="portfolio-footer">
+                    <h4>HTML5 Canvas, MP4, GIF</h4>
+                </div>
+              </div>
+             
+        </div>
+
+    </div>
+  </div>
+</div>
+      
+<!-- MODALS -->
+        
+    <div id="Modal1" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="true">
+              <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 style ="left:20px;" class="modal-title">Animated Logo</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                  </div>
+                  <div class="modal-body">
+                    <iframe class=" embed-responsive-item" src="modals/Modal1/Modal1.html" width="100%" height="350px" frameBorder="0">Browser not compatible.</iframe>
+                      <div class="modal-txt">
+                      <h4>Tools: Animate CC</h4>
+                      </div>
+                      <div class="modal-txt">
+                      <h4>Formats: HTML5 Canvas, GIF, MP4</h4>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      
+                     
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+
+              </div>
+      </div>
+      
+       <div id="Modal2" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="true">
+              <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 style ="left:20px;" class="modal-title">Interactive Menu</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                  </div>
+                  <div class="modal-body">
+                      <div style="margin: auto;">
+                           <iframe style="min-width: 300px;" class=" embed-responsive-item" src="modals/Modal2/Modal2.html" width="100%"  height="500px" frameBorder="0">Browser not compatible.</iframe>
+                      </div>
+                   
+                      <div class="modal-txt">
+                      <h4>Tools: Animate CC, CreateJS, GSAP</h4>
+                      </div>
+                      <div class="modal-txt">
+                      <h4>Formats: HTML5 Canvas</h4>
+                      </div>
+                      <div class="modal-txt">
+                      <h4>Live link: <a href="https://www.vostron.com/">Vostron.com</a></h4>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      
+                     
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+
+              </div>
+      </div>
+    <div id="Modal3" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="true">
+              <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 style ="left:20px;" class="modal-title">Animated Price Holder</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                  </div>
+                  <div style="margin: auto;" class="modal-body">
+                      <div>
+                         <video autoplay="autoplay" loop="loop" muted defaultMuted playsinline id="backVideo" width="600px" height="675px" >
+                        <source src="modals/Modal3/Modal3.m4v">  
+                        <source src="modals/Modal3/Modal3.mp4" type="video/mp4">  
+                        </video>  
+                      </div>
+                   
+                      <div class="modal-txt">
+                      <h4>Tools: Animate CC</h4>
+                      </div>
+                      <div class="modal-txt">
+                      <h4>Formats: MP4</h4>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      
+                     
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+      </div>
+      <div id="Modal4" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="true">
+              <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 style ="left:20px;" class="modal-title">Animated Price Holder</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                  </div>
+                  <div style="margin: auto;" class="modal-body">
+                      <div>
+                          <iframe class=" embed-responsive-item" src="modals/Modal4/Modal4.html" width="100%" height="350px" frameBorder="0">Browser not compatible.</iframe>
+                      </div>
+                   
+                      <div class="modal-txt">
+                      <h4>Tools: Animate CC</h4>
+                      </div>
+                      <div class="modal-txt">
+                      <h4>Formats:HTML5 Canvas, MP4, GIF </h4>
+                      </div>
+                       <div class="modal-txt">
+                      <h4>Live link: <a href="https://www.harraways.co.nz/">Harraways.co.nz/</a></h4>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+      </div>
+          <div id="Modal5" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="true">
+              <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 style ="left:20px;" class="modal-title">Animated Instagram Video</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                  </div>
+                  <div style="margin: auto;" class="modal-body">
+                      <div>
+                         <video autoplay="autoplay" loop="loop" muted defaultMuted playsinline id="backVideo" width="800px" height="800px" >
+                        <source src="modals/Modal5/Modal5.m4v">  
+                        <source src="modals/Modal5/Modal5.mp4" type="video/mp4">  
+                        </video>  
+                      </div>
+                   
+                      <div class="modal-txt">
+                      <h4>Tools: Animate CC</h4>
+                      </div>
+                      <div class="modal-txt">
+                      <h4>Formats: MP4</h4>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      
+                     
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+      </div>
+      <div id="Modal6" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="true">
+              <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 style ="left:20px;" class="modal-title">Animated Instagram Video</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                  </div>
+                  <div style="margin: auto;" class="modal-body">
+                      <div >
+                         <video style="max-height: 600px;" autoplay="autoplay" loop="loop" muted defaultMuted playsinline id="backVideo" width="336px" height="600px" >
+                        <source src="modals/Modal6/Modal6.m4v">  
+                        <source src="modals/Modal6/Modal6.mp4" type="video/mp4">  
+                        </video>  
+                      </div>
+                   
+                      <div class="modal-txt">
+                      <h4>Tools: Animate CC</h4>
+                      </div>
+                      <div class="modal-txt">
+                      <h4>Formats: MP4</h4>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      
+                     
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+      </div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/plugins/CSSPlugin.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/plugins/ScrollToPlugin.min.js"></script>   
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="script/logo.js"></script> 
+    <script src="script/share.js"></script>  
+    <script type="text/javascript"src="script/preloader.js"></script>
+    <script src="script/script.js"></script>  
+    <script src="script/button.js"></script>    
+  </body>
+
+</html>

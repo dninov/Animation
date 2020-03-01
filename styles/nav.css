@@ -1,0 +1,93 @@
+#nav-toggle { position: absolute; left: 17px; top: 20px; }
+
+#nav-toggle { cursor: pointer; padding: 10px 35px 16px 0px; }
+#nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
+  cursor: pointer;
+  height: 5px;
+  width: 30px;
+  background: white;
+  position: absolute;
+  display: block;
+  content: '';
+}
+#nav-toggle span:before {
+  top: -10px; 
+}
+#nav-toggle span:after {
+  bottom: -10px;
+}
+
+#nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
+  transition: all 500ms ease-in-out;
+}
+#nav-toggle.active span {
+  background-color: transparent;
+}
+#nav-toggle.active span:before, #nav-toggle.active span:after {
+  top: 0;
+}
+#nav-toggle.active span:before {
+  transform: rotate(45deg);
+}
+#nav-toggle.active span:after {
+  transform: rotate(-45deg);
+}
+
+.overlay {
+    position: fixed;
+    z-index: 0;
+    overflow: hidden;
+    right: 0;   
+    opacity:0;
+    height: 100%;
+    width: 220px;
+    background-color: rgba(0,0,0, 0.7);
+}
+
+/* Position the content inside the overlay */
+.overlay-content {
+    right:90px;
+    position: fixed;
+    z-index: 300;
+    top:128px; /* 25% from the top */
+    height: 0; /* 100% width */
+    text-align: right; /* Centered text/links */
+    margin-top: -25px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+    z-index: 200;
+    margin-right:0px;
+    -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition:0.6s;
+}
+
+/* The navigation links inside the overlay */
+.overlay a {
+    padding-bottom: 45px;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: 'Bangers', cursive;
+     color: white;
+   -webkit-text-stroke-width: 0.3px;
+   -webkit-text-stroke-color: #FC6C58;
+    word-wrap: break-word;
+     -webkit-hyphens: auto;
+     -moz-hyphens: auto;
+     -ms-hyphens: auto;
+     -o-hyphens: auto;
+     hyphens: auto;
+    display: block; /* Display block instead of inline */
+}
+
+/* When you mouse over the navigation links, change their color */
+.overlay a:hover, .overlay a:focus {
+ color: #f1f1f1;
+}
+
+@media screen and (max-height: 450px) {
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+    }
+}
