@@ -5,7 +5,6 @@ var logoBig = true;
 var vid;
 
 $(document).ready(function() {  
-window.scrollTo(0, 0);
 var $container = $('.portfolioContainer');
     $container.isotope({
         filter: '*',
@@ -31,16 +30,26 @@ var $container = $('.portfolioContainer');
          });
          return false;
     }); 
-       window.addEventListener("resize", Resize);
-       readyListeners();
+        window.addEventListener("resize", Resize);
+    if (window.pageYOffset<50){
+        TweenMax.to("#logoBgr", 1, { scaleX:4,scaleY:4, autoAlpha:"1", ease:Power3.easeOut}); 
+        TweenMax.from("#share", 2, {top:-100,alpha:0, ease: Elastic.easeOut.config(1, 0.3)});
+        console.log("logo rise");
+        }
+    else if (window.pageYOffset>50){
+         console.log("logo dissapear");
+        document.getElementById('canvas1').style.display="none"; 
+        }
+   
+    window.addEventListener('scroll',Scroll, false);
+    
 });
 
-function readyListeners(){
-    TweenMax.to("#logoBgr", 1, { scaleX:4,scaleY:4, autoAlpha:"1", ease:Power3.easeOut}); 
-    TweenMax.from("#share", 2, {top:-100,alpha:0, ease: Elastic.easeOut.config(1, 0.3)});
-    window.addEventListener('scroll',Scroll, false);
-}
+
+   
+
 function Resize() {
+    
     if (logoBig == false){
    resizeLogо();
     }
@@ -51,37 +60,36 @@ function Scroll() {
    st = window.pageYOffset || document.documentElement.scrollTop;
    if (st > lastScrollTop){
        if (logoBig == true){
+           console.log("logo goes up");
+       logoBig = false;
        TweenMax.set("#canvas1", {zIndex:4});
-       TweenMax.to("#canvas1", 0.5, {y:"-80%",   ease:Power3.easeIn});     
+       TweenMax.to("#canvas1", 1, {y:"-80%",   ease:Power3.easeOut});     
        TweenMax.to("#arrow", 0.2, {   autoAlpha:"0", ease:Power3.easeOut});
-       TweenMax.to("#logoBgr", 1, {    scaleX:2,scaleY:2,  autoAlpha:"0.7", ease:Power3.easeOut}); 
-           
+       TweenMax.to("#logoBgr", 3, { rotation:0,   autoAlpha:"0.5", ease:Power3.easeOut}); 
        TweenMax.to('.nav-link1', 1, {color:"#FFFFFF", ease:Power3.easeOut});
-       TweenMax.to('.fixed-top', 0.5, {marginTop:"-80px", ease:Power3.easeOut});
-           
+       TweenMax.to('.fixed-top', 0.5, {marginTop:"-80px", ease:Power3.easeOut}); 
        TweenMax.to(".text-container", 1, {  y:+250, ease:Power3.easeOut});    
-       logoBig = false;        
+               
        }
 
    } 
   else  if  (st < lastScrollTop && st > 300  ){
-      
- 
-
-          
+      console.log("logo goes small");
+       document.getElementById('canvas1').style.display=""; 
        TweenMax.to('.fixed-top', 0.5, {marginTop:"0px", ease:Power3.easeOut});
        TweenMax.to('.nav-link1', 1, {color:"#354355", ease:Power3.easeOut});
-         smallOver();  
- 
+       smallOver();  
       }      
     
-    else{
-        if(logoBig == false){
+  else{
+       console.log("logo goes big");
+       if(logoBig == false){
+       
        TweenMax.to("#arrow", 1, {   autoAlpha:"1", ease:Power3.easeOut}); 
-       TweenMax.to("#logoBgr", 3, {  scaleX:4,scaleY:4,autoAlpha:"1", ease:Power3.easeOut}); 
+       TweenMax.to("#logoBgr", 3, {  rotation:5,  autoAlpha:"1", ease:Power3.easeOut}); 
         TweenMax.to(".text-container", 2, { delay:0.5, y:0, ease: Elastic.easeOut.config(0.8, 0.8)});
         logoBig = true;
-        TweenMax.to("#canvas1", 2, {yPercent:-50, xPercent:-50, x:"-50%", y:"0%", scale:1,   ease: Elastic.easeOut.config(0.8, 0.5), clearProps:"xPercent, yPercent"});      
+        TweenMax.to("#canvas1", 1, {yPercent:-50, xPercent:-50, x:"-50%", y:"0%", scale:1,   ease: Elastic.easeOut.config(0.5, 0.5), clearProps:"xPercent, yPercent"});      
         }
     }
    lastScrollTop = st <= 0 ? 0 : st; 
@@ -98,7 +106,7 @@ function Scroll() {
 }
 function smallOver(){
     //window.addEventListener('scroll',Scroll, false);
-    
+    console.log("smallOver")
         if (window.innerWidth <=400){
        TweenMax.set("#canvas1", {yPercent:-50, xPercent:-50, x:"-70%", scale:0.5, zIndex:51});        
             }
