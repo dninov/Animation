@@ -70,16 +70,9 @@ function Scroll() {
       TweenMax.set("#canvas1", { zIndex: 1 });
       TweenMax.to("#canvas1", 1, { y: -600, ease: Power3.easeIn, onComplete: smallOver });
       TweenMax.to("#arrow", 0.2, { autoAlpha: "0", ease: Power3.easeOut });
-      TweenMax.to("#logoBgr", 3, {
-        rotation: 0,
-        autoAlpha: "0.5",
-        ease: Power3.easeOut,
-      });
+      TweenMax.to("#logoBgr", 3, {rotation: 0, autoAlpha: "0.5",ease: Power3.easeOut,});
       TweenMax.to(".nav-link1", 1, { color: "#FFFFFF", ease: Power3.easeOut });
-      TweenMax.to(".fixed-top", 0.5, {
-        marginTop: "0px",
-        ease: Power3.easeOut,
-      });
+      TweenMax.to(".fixed-top", 0.5, {marginTop: "0px", ease: Power3.easeOut,});
       TweenMax.to(".text-container", 1, { y: +250, ease: Power3.easeOut });
     }
   } else if (st < lastScrollTop && st > 300) {
@@ -92,41 +85,24 @@ function Scroll() {
     console.log("logo goes big");
     if (logoBig == false) {
       TweenMax.to("#arrow", 1, { autoAlpha: "1", ease: Power3.easeOut });
-      TweenMax.to("#logoBgr", 3, {
-        rotation: 5,
-        autoAlpha: "1",
-        ease: Power3.easeOut,
-      });
-      TweenMax.to(".text-container", 2, {
-        delay: 0.5,
-        y: 0,
-        ease: Elastic.easeOut.config(0.8, 0.8),
-      });
-      TweenMax.to("#canvas1", 1, {
-        yPercent: -50,
-        xPercent: -50,
-        x: "-50%",
-        y: "0%",
-        scale: 1,
-        ease: Elastic.easeOut.config(0.5, 0.5),
-        clearProps: "xPercent, yPercent",
-      });
-      TweenMax.to(".fixed-top", 0.5, {
-        marginTop: "-80px",
-        ease: Power3.easeOut,
-      });
+      TweenMax.to("#logoBgr", 3, {rotation: 5,autoAlpha: "1", ease: Power3.easeOut,});
+      TweenMax.to(".text-container", 2, {delay: 0.5,y: 0,ease: Elastic.easeOut.config(0.8, 0.8),});
+      TweenMax.to("#canvas1", 1, {yPercent: -50,xPercent: -50,x: "-50%",y: "0%",scale: 1,ease: Elastic.easeOut.config(0.5, 0.5),clearProps: "xPercent, yPercent",});
+      TweenMax.to(".fixed-top", 0.5, {marginTop: "-80px", ease: Power3.easeOut});
       logoBig = true;
     }
   }
   lastScrollTop = st <= 0 ? 0 : st;
 
-  if (document.getElementById("video-row").getBoundingClientRect().top < -100) {
-    document.getElementById("logoBgr").style.display = "none";
+
+  if (document.getElementById("waves").getBoundingClientRect().top < 20) {
+    document.getElementById("Video").style.display = "none";
   } else if (
-    document.getElementById("video-row").getBoundingClientRect().top > -100
+    document.getElementById("waves").getBoundingClientRect().top > 20
   ) {
-    document.getElementById("logoBgr").style.display = "";
+    document.getElementById("Video").style.display = "";
   }
+
 }
 function smallOver() {
   //window.addEventListener('scroll',Scroll, false);

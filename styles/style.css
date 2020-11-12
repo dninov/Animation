@@ -191,7 +191,9 @@ p {
     text-align: center;
 }
 #video-row{
-    position: relative;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
     background-color: #FC6C58;
     padding-bottom: 150px;
     z-index: 2;
