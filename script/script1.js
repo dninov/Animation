@@ -6,6 +6,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let logoTxt = document.getElementById('logoTxt');
     let logoBig = true;
     window.addEventListener("resize", Resize);
+    let tl = gsap.timeline({
+        scrollTrigger:{
+            trigger: arrow,
+            start: "bottom center"
+        }
+    });
+    tl.to(logo, {duration:1.5, y: -500, ease:Elastic.easeIn.config(0.5, 0.3), onComplete:logoSmall})
+
     // window.onscroll = function() {
     //     if (window.scrollY > 0 && logoBig == true) {
     //        logoBig = false;
