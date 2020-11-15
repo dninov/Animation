@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             start: "bottom center"
         }
     });
-    tl.to(logo, {duration:1.5, y: -500, ease:Elastic.easeIn.config(0.5, 0.3)})
+    tl.to(logo, {duration:1.5, y: -500, ease:Elastic.easeIn.config(0.5, 0.3), onComplete:logoSmall})
 
     // window.onscroll = function() {
     //     if (window.scrollY > 0 && logoBig == true) {
@@ -30,10 +30,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     function setSmallLogo(){
         if (window.innerWidth < 400) {
             console.log("<400");
-            gsap.set(logo, { scaleX:0.4, scaleY:0.4, y:"-37%",left:"25%", zIndex:99})
+            gsap.set(logo, { scaleX:0.4, scaleY:0.4, y:"-37%",left:"25%"})
         }
         else {
-            gsap.set(logo, { scaleX:0.2, scaleY:0.2, y:"-45%",left:"10%", zIndex:99})
+            gsap.set(logo, { scaleX:0.2, scaleY:0.2, y:"-45%",left:"10%"})
         }
     }
     function Resize(){
