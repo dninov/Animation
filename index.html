@@ -165,9 +165,35 @@
         </li>
       </ul>
     </div>
-
+    <!-- Top Bar -->
+    <div id="topBar" class="fixed-top"></div>
+    <!-- Logo -->
+    <div id="logo">
+      <div
+        id="animation_container"
+        style="
+          background-color: rgba(69, 134, 211, 0);
+          width: 100%;
+          height: 100%;
+        "
+      >
+        <canvas
+          id="canvas1"
+          style="background-color: rgba(69, 134, 211, 0)"
+        ></canvas>
+        <div
+          id="dom_overlay_container"
+          style="
+            pointer-events: none;
+            /* overflow: hidden; */
+            width: 100%;
+            height: 100%;
+          "
+        ></div>
+      </div>
+    </div>
     <!-- Page Content -->
-    <div class="container-fluid main-content">
+    <div class="container-fluid">
       <div class="row">
         <div id="logoBgr" class="col-lg-12"></div>
       </div>
@@ -248,13 +274,9 @@
         <div class="container">
           <div class="row">
             <div class="col-xl-4 service">
-              <iframe
-                src="frames/res.html"
-                width="300"
-                height="220"
-                frameborder="0"
-                >Browser not compatible.</iframe
-              >
+              <div id="res">
+                <!-- Your Animation will be show up here -->   
+               </div>
               <div class="services-text">
                 <h3>RESPONSIVE WEB DESIGN</h3>
                 <p>
@@ -306,13 +328,9 @@
               </div>
             </div>
             <div class="col-xl-4 service">
-              <iframe
-                src="frames/timeline.html"
-                width="300"
-                height="220"
-                frameborder="0"
-                >Browser not compatible.</iframe
-              >
+              <div id="animation">
+                <!-- Your Animation will be show up here -->   
+               </div>
               <div class="services-text">
                 <h3>ANIMATIONS</h3>
                 <p>
@@ -362,13 +380,9 @@
               </div>
             </div>
             <div class="col-xl-4 service">
-              <iframe
-                src="frames/interactive.html"
-                width="300"
-                height="220"
-                frameborder="0"
-                >Browser not compatible.</iframe
-              >
+              <div id="interactive">
+                <!-- Your Animation will be show up here -->   
+               </div>
               <div class="services-text">
                 <h3>HTML5 ADS</h3>
                 <p>
@@ -843,41 +857,14 @@
         </div>
       </div>
     </div>
-
-
-        <!-- Top Bar -->
-        <div id="topBar" class="fixed-top"></div>
-        <!-- Logo -->
-        <div id="logo">
-          <div
-            id="animation_container"
-            style="
-              background-color: rgba(69, 134, 211, 0);
-              width: 100%;
-              height: 100%;
-            "
-          >
-            <canvas
-              id="canvas1"
-              style="background-color: rgba(69, 134, 211, 0)"
-            ></canvas>
-            <div
-              id="dom_overlay_container"
-              style="
-                pointer-events: none;
-                /* overflow: hidden; */
-                width: 100%;
-                height: 100%;
-              "
-            ></div>
-          </div>
-        </div>
     <!-- Bootstrap core JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link
       rel="stylesheet"
       href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
     />
+    <script src="./SnapSVGAnimator/js/vendor/snap.svg/snap.svg-min.js"></script>
+    <script src="./SnapSVGAnimator/js/SnapSVGAnimator.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
     <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
@@ -889,5 +876,11 @@
     <script type="text/javascript" src="script/preloader.js"></script>
     <script src="script/script1.js"></script>
     <script src="script/button.js"></script>
+    <script src="res.js"></script>
+    <script src="interactive.js"></script>
+    <script src="animation.js"></script>
+ 
+    
+
   </body>
 </html>
