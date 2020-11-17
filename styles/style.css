@@ -174,7 +174,9 @@ p {
  min-height: 100px;
  margin-top:-10px;
  text-align: center; 
- position: relative;
+ position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 80px;
  z-index: 1;
  margin-bottom: -2px;
 }
@@ -193,7 +195,7 @@ p {
 #video-row{
     position: -webkit-sticky; /* Safari */
     position: sticky;
-    top: 0;
+    top: 80px;
     background-color: #FC6C58;
     padding-bottom: 150px;
     z-index: 2;
