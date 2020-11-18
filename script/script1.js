@@ -5,9 +5,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let topBar = document.getElementById('topBar');
     let logoTxt = document.getElementById('logoTxt');
     let services = document.getElementById('servicesRow');
+    let logoBgr = document.getElementById('logoBgr');
     let logoBig = true;
     let curScroll = window.scrollY;
     window.addEventListener("resize", Resize);
+
+    let $container = $(".portfolioContainer");
+    $container.isotope({filter: "*", animationOptions: {duration: 750, easing: "linear", queue: false,},});
 
     if (curScroll > 0){
         logoBig = false;
@@ -21,18 +25,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
         console.log(services.offsetTop - window.scrollY);
         if (window.scrollY > 100 && logoBig == true) {
            logoBig = false;
+           TweenMax.set(logo, {zIndex:1})
+           TweenMax.set(topBar, { alpha:1})
            TweenMax.to(logo, 0.8,{y:"-55%", ease:Elastic.easeIn.config(1.1, 0.8), onComplete:logoSmall})
            TweenMax.to(logoTxt, 0.5,{y: 50, alpha: 0, ease:Power1.easeIn})
            TweenMax.to(arrow, 1,{ alpha: 0});
            TweenMax.to(topBar, 1,{y: 80, ease:Power1.easeOut});
+           TweenMax.to(logoBgr, 3,{alpha: 0.2, ease:Power1.easeOut});
         }
         else if(window.scrollY == 0 && logoBig == false){
             console.log("in");
             logoBig = true;
+            TweenMax.set(logo, {zIndex:1})
             TweenMax.to(logo, 2,{ y: "0%",scale: 1, x:"-50%", ease: Elastic.easeOut.config(1, 0.7) });
             TweenMax.to(logoTxt, 0.5, {delay:0.5, alpha:1, y: 0, ease:Power3.easeOut})
             TweenMax.to(arrow, 1, {alpha: 1});
-            TweenMax.to(topBar, 1, {y: 0, ease:Power1.easeIn});
+            TweenMax.to(topBar, 0.2, {y: 0, alpha:0, ease:Power1.easeIn});
+            TweenMax.to(logoBgr, 0.5,{alpha: 1, ease:Power1.easeOut});
         }
         if (services.offsetTop - window.scrollY < 0) {
             document.getElementById("Video").style.display = "none";
