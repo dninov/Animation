@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let logo = document.getElementById('canvas1');
     let topBar = document.getElementById('topBar');
     let logoTxt = document.getElementById('logoTxt');
+    let services = document.getElementById('servicesRow');
     let logoBig = true;
     let curScroll = window.scrollY;
     window.addEventListener("resize", Resize);
@@ -17,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     window.onscroll = function() {
-        console.log(window.scrollY, logoBig);
+        console.log(services.offsetTop - window.scrollY);
         if (window.scrollY > 100 && logoBig == true) {
            logoBig = false;
            TweenMax.to(logo, 0.8,{y:"-55%", ease:Elastic.easeIn.config(1.1, 0.8), onComplete:logoSmall})
@@ -33,6 +34,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
             TweenMax.to(arrow, 1, {alpha: 1});
             TweenMax.to(topBar, 1, {y: 0, ease:Power1.easeIn});
         }
+        if (services.offsetTop - window.scrollY < 0) {
+            document.getElementById("Video").style.display = "none";
+        }
+        else{
+            document.getElementById("Video").style.display = "";
+        }
+        
     };
 
     function logoSmall(){
