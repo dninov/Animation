@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let logoBgr = document.getElementById('logoBgr');
     let logoBig = true;
     let curScroll = window.scrollY;
+    let backVideo = document.querySelector("#backVideo");
+
     window.addEventListener("resize", Resize);
 
     let $container = $(".portfolioContainer");
@@ -44,10 +46,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
             TweenMax.to(logoBgr, 0.5,{alpha: 1, ease:Power1.easeOut});
         }
         if (services.offsetTop - window.scrollY < 0) {
-            document.getElementById("Video").style.display = "none";
+            backVideo.pause();
         }
         else{
-            document.getElementById("Video").style.display = "";
+            backVideo.play();
         }
         
     };
